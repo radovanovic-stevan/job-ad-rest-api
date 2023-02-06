@@ -10,7 +10,7 @@ export class JobAdService {
     if (jobAds.some((elem) => elem.title === ad.title)) throw new HttpException('Ad with that title already exists',400);
     const id = this.getNewId();
     jobAds.unshift({ ...ad, id });
-    return id;
+    return {id};
   }
 
   findAll(    
@@ -47,7 +47,7 @@ export class JobAdService {
       throw new HttpException('Ad with that title already exists',400);
     }
     jobAds[adIndex] = { ...jobAds[adIndex], ...changed };
-    return 'Creation Success';
+    return {status: 'Creation Success'};
   }
 
   private getNewId(): number {
